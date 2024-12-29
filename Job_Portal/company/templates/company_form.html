@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+JOB PORTAL
+{% endblock title %}
+
+{% block content %}
+<h1>Welcome To Job Portal</h1>
+{% if form.instance.pk  %}
+Edit Company
+{% else %}
+Create Company
+{% endif %}
+
+<form class="form" method="post">
+    {% csrf_token %}
+    {{form}}
+    <button class="btn btn-warning" type="submit">Submit</button>
+</form>
+<a href="{% url 'company_list' %}">Back to Company List</a>
+
+{% endblock %}

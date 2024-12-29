@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  JOB PORTAL
+{% endblock %}
+
+{% block content %}
+  <h1>Welcome To Job Portal</h1>
+
+  {% if not user_has_company %}
+    <a class="btn btn-primary" href="{% url 'company_create' %}">Create a company</a>
+  {% else %}
+    <p>You already have a company. You can't create another one.</p>
+  {% endif %}
+    {% for company in companies %}
+      <div class="card bg-dark" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ company.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">{{ company.contact }}</h6>
+          <p class="card-text">{{ company.address }}</p>
+          <a href="{% url 'company_edit' company.id %}" class="btn btn-primary">Edit</a>
+          <a href="{% url 'company_delete' company.id %}" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

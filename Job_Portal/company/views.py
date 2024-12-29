@@ -8,7 +8,9 @@ def index(request):
 
 def company_list(request):
     companies = Company.objects.all().order_by("-created_At")
-    return render(request , 'company_list.html' , {'companies' : companies})
+    users_company = Company.objects.filter(user = request.user)
+    user_has_company = users_company.exists()
+    return render(request , 'company_list.html' , {'companies' : companies , 'user_has_company': user_has_company,})
 
 def company_create(request):
     if request.method == "POST":
