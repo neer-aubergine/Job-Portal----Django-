@@ -2,24 +2,17 @@ from django.shortcuts import render
 from .models import Job
 from .forms import JobForm
 from django.shortcuts import get_object_or_404 , redirect
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
     return render(request , 'jobs.html')
-
+@login_required
 def jobs_list(request):
-    # print(request.user)
-    # print("========================================================")
     jobs = Job.objects.all().order_by("-created_At")
-    # if request.user != "AnonymousUser":
-        # print("=======================1")
-        # users_company = Company.objects.filter(user = request.user)
-   
-    # user_has_company = users_company.exists()
     return render(request , 'jobs.html' , {'jobs' : jobs })
 
-
-
+@login_required
 def job_create(request):
     if request.method == "POST":
         form = JobForm(request.POST)
@@ -33,6 +26,7 @@ def job_create(request):
         form = JobForm()
     return render(request , 'job_form.html' , {'form' : form})
 
+@login_required
 def job_edit(request , job_id):
     job = get_object_or_404(Job , pk = job_id , user = request.user)
     if request.method == "POST":
@@ -46,6 +40,7 @@ def job_edit(request , job_id):
         form = JobForm(instance=job)
     return render(request , 'job_form.html' , {'form' : form})
 
+@login_required
 def job_delete(request , job_id):
     job = get_object_or_404(Job , pk = job_id , user = request.user)
     if request.method == "POST":
