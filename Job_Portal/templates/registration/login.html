@@ -5,9 +5,9 @@
 <form  method="post">
     {% csrf_token %}
     {{form}}
-    <button class="btn btn-primary">Login</button>
+    <button style="margin-top: 5px;" class="btn btn-primary">Login</button>
 </form>
-<p>Dont have account?</p>
-<a href="{% url 'register' %}">Register here</a>
+<p style="margin-top: 5px;">Dont have account?</p>
+<a style="margin-top: 5px;" href="{% url 'register' %}">Register here</a>
 
 {% endblock  %}
