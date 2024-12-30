@@ -12,14 +12,17 @@
   {% else %}
     <p>You already have a company. You can't create another one.</p>
   {% endif %}
+  <div style="display: flex; flex-direction: row; justify-content: space-around;">
     {% for company in companies %}
       <div class="card bg-dark" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">{{ company.name }}</h5>
           <h6 class="card-subtitle mb-2 text-body-secondary">{{ company.contact }}</h6>
           <p class="card-text">{{ company.address }}</p>
-          <a href="{% url 'company_edit' company.id %}" class="btn btn-primary">Edit</a>
-          <a href="{% url 'company_delete' company.id %}" class="btn btn-danger">Delete</a>
+          {% if company.user == user %}
+            <a href="{% url 'company_edit' company.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'company_delete' company.id %}" class="btn btn-danger">Delete</a>
+          {% endif %}
         </div>
       </div>
     {% endfor %}
