@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  JOB PORTAL
+{% endblock %}
+
+{% block content %}
+  <h1>Welcome To Job Portal</h1>
+  {% comment %} <a href="{% url 'job_create' %}" class="btn btn-primary">Add a job</a> {% endcomment %}
+  <div style="display: flex; flex-direction: row; justify-content: space-around;">
+    {% for job in jobs %}
+      <div class="card bg-dark" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Role : {{ job.name }}</h5>
+          <h6 class="card-title mb-2 ">Company : {{ job.company }}</h6>
+          <p class="card-text">Salary : {{ job.salary }}</p>
+          {% if job.user == user %}
+            <a href="{% url 'job_edit' job.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'job_delete' job.id %}" class="btn btn-danger">Delete</a>
+          {% endif %}
+        </div>
+      </div>    
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -19,6 +19,7 @@ def company_list(request):
     user_has_company = users_company.exists()
     return render(request , 'company_list.html' , {'companies' : companies , 'user_has_company': user_has_company,})
 
+
 @login_required
 def company_create(request):
     if request.method == "POST":
