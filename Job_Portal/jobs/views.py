@@ -3,6 +3,7 @@ from .models import Job
 from .forms import JobForm
 from django.shortcuts import get_object_or_404 , redirect
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 # Create your views here.
 
 def index(request):
@@ -10,7 +11,10 @@ def index(request):
 @login_required
 def jobs_list(request):
     jobs = Job.objects.all().order_by("-created_At")
-    return render(request , 'jobs.html' , {'jobs' : jobs })
+    paginator = Paginator(jobs,6)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request , 'jobs.html' , {'jobs' : page_obj })
 
 @login_required
 def job_create(request):

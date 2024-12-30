@@ -7,7 +7,7 @@
 {% block content %}
   <h1>Welcome To Job Portal</h1>
   {% comment %} <a href="{% url 'job_create' %}" class="btn btn-primary">Add a job</a> {% endcomment %}
-  <div style="display: flex; flex-direction: row; justify-content: space-around;">
+  <div style="display: grid; grid-template-columns: auto auto auto; grid-auto-flow: row; row-gap: 20px;margin-top: 20px; column-gap: 15px; justify-content: center;" >
     {% for job in jobs %}
       <div class="card bg-dark" style="width: 18rem;">
         <div class="card-body">
@@ -22,4 +22,16 @@
       </div>    
     {% endfor %}
   </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination" style="margin-top: 20px; justify-content: center;">
+      {% if jobs.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+      {% endif %}
+      
+      {% if jobs.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ jobs.next_page_number }}">Next</a></li>
+      {% endif %}
+      
+    </ul>
+  </nav>
 {% endblock %}
