@@ -12,7 +12,9 @@ Welcome to the JobPortal project! This project is a web application built using 
 - [x] Pagination for list of jobs
 - [ ] filters for job posts based on location or salary or tags
 
+## 🌍 Live Demo
 
+👉 [Live Demo - My Website](https://erenyeager.pythonanywhere.com/)
 
 ## Table of Contents
 
